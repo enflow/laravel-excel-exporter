@@ -19,6 +19,12 @@ readonly class PushHandler
         PusherFactory::make($export)->each(function (Pusher $pusher) use ($export) {
             $this->log('Pushing via '.$pusher::class, 'info');
 
+            if (method_exists($export, 'prepare')) {
+                $this->log('Preparing export...');
+
+                $export->prepare();
+            }
+
             $writer = app(Writer::class)->export($export, Excel::CSV);
             $temporaryFilePath = $writer->getLocalPath();
 
