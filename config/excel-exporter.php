@@ -1,5 +1,10 @@
 <?php
 
+use Enflow\LaravelExcelExporter\Exporters\GoogleBigQuery\ExportableToGoogleBigQuery;
+use Enflow\LaravelExcelExporter\Exporters\GoogleBigQuery\GoogleBigQueryServiceFactory;
+use Enflow\LaravelExcelExporter\Exporters\GoogleSheet\ExportableToGoogleSheet;
+use Enflow\LaravelExcelExporter\Exporters\GoogleSheet\GoogleSheetServiceFactory;
+
 return [
     /**
      * The classes that should be available as exports.
@@ -20,8 +25,8 @@ return [
              */
             'service_account_credentials_json' => storage_path('secrets/google-service-account.json'),
 
-            'interface' => \Enflow\LaravelExcelExporter\Exporters\GoogleSheet\ExportableToGoogleSheet::class,
-            'factory' => \Enflow\LaravelExcelExporter\Exporters\GoogleSheet\GoogleSheetServiceFactory::class,
+            'interface' => ExportableToGoogleSheet::class,
+            'factory' => GoogleSheetServiceFactory::class,
         ],
 
         'google-bigquery' => [
@@ -35,8 +40,8 @@ return [
             'project_id' => 'your-project-id',
             'dataset_id' => 'your-dataset-id',
 
-            'interface' => \Enflow\LaravelExcelExporter\Exporters\GoogleBigQuery\ExportableToGoogleBigQuery::class,
-            'factory' => \Enflow\LaravelExcelExporter\Exporters\GoogleBigQuery\GoogleBigQueryServiceFactory::class,
+            'interface' => ExportableToGoogleBigQuery::class,
+            'factory' => GoogleBigQueryServiceFactory::class,
         ],
     ],
 
